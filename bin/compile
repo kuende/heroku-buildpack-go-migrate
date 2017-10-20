@@ -3,6 +3,8 @@
 
 set -eo pipefail
 
+build=$(cd "$1/" && pwd)
+
 buildpack=$(dirname $(dirname $0))
 
 # Add bundled binaries to path.
@@ -31,4 +33,4 @@ then
 fi
 
 # Run migration.
-migrate -verbose -path="$MIGRATE_PATH" -database="$MIGRATE_DATABASE_URL" up
+migrate -verbose -path="$build/$MIGRATE_PATH" -database="$MIGRATE_DATABASE_URL" up
